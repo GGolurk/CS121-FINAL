@@ -33,8 +33,8 @@ public void start(){
 ------------ print("TURN " + counter)  
 ------------ counter++  
 ------------ // Getting the ATK/DEF from both players as an int array [ATK, DEF]  
------------- int[] p1actions = getActions(player1, player2)  
------------- int[] p2actions = getActions(player2, player1)  
+------------ int[] p1actions = startActions(player1, player2)  
+------------ int[] p2actions = startActions(player2, player1)  
 ------------ // Takes the atk/def of both players and applies damage  
 ------------ takeDamage(p1actions, p2actions)  
 ------------ winner = determineWinner()  
@@ -46,7 +46,7 @@ public void start(){
 }  
 
 // This needs the opposing player to access their stats, specifically defense
-public int[] getActions(player, opponent){  
+public int[] startActions(player, opponent){  
 ---- // getCombatInput returns the location of actions as a string  
 ---- print(player + ": Enter your Actions")  
 ---- int damage = 0  
@@ -161,6 +161,8 @@ string type
 public int getRandomNum(int min, int max)  
 public int attack(int atk, int def)  
 public int defend()  
+public string getType()
+public void setType(string newType)
 
 ### Attack Class
 
@@ -183,6 +185,18 @@ public int defend(){
 ---- return 0  
 }  
 
+public string getType(){  
+---- return type  
+}  
+
+public void setType(newType){  
+---- if(newType != "attack" and newType != "defense"){
+-------- print("Invalid type!")
+---- } else {  
+-------- type = newType  
+---- } // End if/else  
+}
+
 ### Defend Class
 
 type = "defense"
@@ -199,3 +213,15 @@ public int defend(){
 ---- reduction = getRandomNum(1, 6)  
 ---- return reduction
 }  
+
+public string getType(){  
+---- return type  
+}  
+
+public void setType(newType){  
+---- if(newType != "attack" and newType != "defense"){
+-------- print("Invalid type!")
+---- } else {  
+-------- type = newType  
+---- } // End if/else  
+}
