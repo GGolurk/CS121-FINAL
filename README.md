@@ -32,17 +32,11 @@ public void start(){
 -------- while(winner == "nobody"){  
 ------------ print("TURN " + counter)  
 ------------ counter++  
------------- // Getting the actions from both players as an array  
------------- string[] p1actions = getActions(player1)  
------------- string[] p2actions = getActions(player2)  
------------- // I decided to separate the actions into two parts, the attack and the defense/implementation.  
------------- // I thought this would be the most streamlined way to do it without forcing everything into one massive procedural function,  
------------- // dividing the data into one part which messes with the player's data, and one part which messes with the opponent's data.  
------------- int p1attack = getAttack(player1, p1actions)  
------------- int p2attack = getAttack(player2, p2actions) 
------------- // takeDamage deals with taking damage and reducing damage taken
------------- takeDamage(player2, p1attack)  
------------- takeDamage(player1, p2attack)  
+------------ // Getting the ATK/DEF from both players as an int array [ATK, DEF]  
+------------ int[] p1actions = getActions(player1)  
+------------ int[] p2actions = getActions(player2)  
+------------ // Takes the atk/def of both players and applies damage  
+------------ takeDamage(p1actions, p2actions)  
 ------------ winner = determineWinner()  
 -------- } // end while  
 -------- print("The winner is: " + winner)  
@@ -53,31 +47,38 @@ public void start(){
 
 public int[] getActions(player){  
 ---- // getCombatInput returns the location of actions as a string  
----- print(player + ": Enter your Actions")
----- string action1 = player.getCombatInput()
----- string action2 = player.getCombatInput(action1)
-}  
-
-public int getAttack(player, int[] actions){  
----- // Takes the actions chosen and has them use their methods  
----- Action[] useActions = player.getActions()  
----- int[] tempDamage = {0, 0}  
----- if(useActions[actions[0]].getType() == "attack"){  
--------- if(tempDamage[0] == 0){  
------------- tempDamage[0] = useActions[actions[0]].attack()  
--------- } // End if  
----- } // End if   
----- if(useActions[actions[1]].getType() == "attack"){  
--------- if(tempDamage[0] == 0){  
------------- tempDamage[0] = useActions[actions[1]].attack()  
+---- print(player + ": Enter your Actions")  
+---- int damage = 0  
+---- int defend = 0  
+---- Action[player.getNumActions()] actions = {}  
+---- // First for loop gets all actions
+---- for(int i = 0; i < player.getNumActions(); i++){  
+-------- actions[i] = player.getCombatInput()  
+---- } // End for  
+---- // Second for loop uses all actions
+---- for(int j = 0; j < player.getNumActions(); j++){
+-------- if(actions[j].getType() == "attack"){  
+------------ damage += actions[j].attack()  
 -------- } else {  
------------- tempDamage[1] = useActions[actions[1]].attack()  
--------- } // End else  
----- } // End if   
+------------ defend += actions[j].defend()  
+-------- } // End if/else  
+---- } // End for  
+---- // Returns data
+---- int[] atkDef = {damage, defend}
+---- return atkDef[]
 }  
 
-public void takeDamage(player, int damage){  
----- //  
+public void takeDamage(int[] p1atkDef, int[] p2atkDef){  
+---- int p1change = p2atkDef[0] - p1atkDef[1]  
+---- if(p1change < 1 and p2atkDef[0] > 0){  
+-------- p1change = 1  
+---- } // End if  
+---- int p2change = p1atkDef[0] - p2atkDef[1]  
+---- if(p2change < 1 and p1atkDef[0] > 0){  
+-------- p2change = 1  
+---- } // End if  
+---- player1.setHP(p1.getHP() - p1change)  
+---- player2.setHP(p2.getHP() - p2change)  
 }  
 
 public string determineWinner(){  
@@ -99,9 +100,10 @@ Data:
  - int attack
  - int defense
  - int HP
- - array actions
+ - Action[] actions
+ - int numActions
 
-public string getCombatInput(exclude){  
+public int getCombatInput(){  
 ---- for(int i = 0; i < actions.length(); i++){  
 -------- if(exclude != i){  
 ------------ print("Enter " + i + " for " + actions[i])  
@@ -112,16 +114,44 @@ public string getCombatInput(exclude){
 ---- // might validate input if I have time
 }  
 
-public int getAttackValue(){  
-
+public int getAttack(){  
+---- return attack  
 }  
 
-public int getDefenseValue(){  
-
+public void setAttack(int atk){
+---- attack = atk
 }  
 
-public string getHP(){  
+public int getDefense(){  
+---- return defense  
+}  
+
+public void setDefense(int def){  
+---- defense = def
+}  
+
+public int getHP(){  
 ---- return HP  
+}  
+
+public void setHP(health){  
+---- HP = health  
+}  
+
+public int getNumActions(){
+---- return numActions
+}  
+
+public int setNumActions(actNum){  
+---- numActions = actNum  
+}  
+
+public Action[] getActions(){  
+---- return actions
+}  
+
+public void setActions(Action[] actns){  
+---- actions = actns  
 }  
 
 ### Action Interface
