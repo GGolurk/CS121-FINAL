@@ -33,8 +33,8 @@ public void start(){
 ------------ print("TURN " + counter)  
 ------------ counter++  
 ------------ // Getting the ATK/DEF from both players as an int array [ATK, DEF]  
------------- int[] p1actions = getActions(player1)  
------------- int[] p2actions = getActions(player2)  
+------------ int[] p1actions = getActions(player1, player2)  
+------------ int[] p2actions = getActions(player2, player1)  
 ------------ // Takes the atk/def of both players and applies damage  
 ------------ takeDamage(p1actions, p2actions)  
 ------------ winner = determineWinner()  
@@ -45,7 +45,8 @@ public void start(){
 ---- } // end if else  
 }  
 
-public int[] getActions(player){  
+// This needs the opposing player to access their stats, specifically defense
+public int[] getActions(player, opponent){  
 ---- // getCombatInput returns the location of actions as a string  
 ---- print(player + ": Enter your Actions")  
 ---- int damage = 0  
@@ -58,7 +59,7 @@ public int[] getActions(player){
 ---- // Second for loop uses all actions
 ---- for(int j = 0; j < player.getNumActions(); j++){
 -------- if(actions[j].getType() == "attack"){  
------------- damage += actions[j].attack()  
+------------ damage += actions[j].attack(player.getAttack(), opponent.getDefense())  
 -------- } else {  
 ------------ defend += actions[j].defend()  
 -------- } // End if/else  
@@ -156,6 +157,45 @@ public void setActions(Action[] actns){
 
 ### Action Interface
 
+string type
+public int getRandomNum(int min, int max)  
+public int attack(int atk, int def)  
+public int defend()  
+
 ### Attack Class
 
+type = "attack"
+
+public int getRandomNum(x, y){  
+---- // Get random number  
+}  
+
+public int attack(int atk, int def){  
+---- int damage = getRandomNum(1, 6)  
+---- damage += (atk - def)  
+---- if(damage < 1){  
+-------- damage = 1  
+---- } // End if  
+---- return damage  
+}  
+
+public int defend(){  
+---- return 0  
+}  
+
 ### Defend Class
+
+type = "defense"
+
+public int getRandomNum(x, y){  
+---- // Get random number  
+}  
+
+public int attack(int atk, int def){  
+---- return 0
+}  
+
+public int defend(){  
+---- reduction = getRandomNum(1, 6)  
+---- return reduction
+}  
