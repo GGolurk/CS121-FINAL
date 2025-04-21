@@ -5,6 +5,6 @@ import java.io.*;
 // Player class
 // Holds primary game data, and acesses it
 
-public class Player(){
+public class Player{
 
 } // End player
