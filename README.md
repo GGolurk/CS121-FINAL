@@ -5,20 +5,60 @@ Made by Nathan Merk.
 ## Purpose
 This short game is designed to show off how much I have learned at this class, how much better  
 I've gotten at making algorithms and programs, especially in an Object oriented setting, and  
-how I have broadened my understanding of what it means to develop software. Also, the ultimate
+how I have broadened my understanding of what it means to develop software. Also, the ultimate  
 purpose of this as a final project is to continue to learn, as I have all semester.
 
 ## Overview
+This project is a mostly faithful recreation of the combat of the Dino Fight, the game I have  
+been creating in my CS215 class this semester. The combat revolves around the actions that players  
+can take in a turn, of which I have limited in scope to two types: offensive types, and defensive  
+types. The idea is that players will enter their actions one after the other, and they will both  
+happen at the same time, reducing the HP of both players until it reaches 0. 
 
 ## Data Management
+When initially thinking about the project, I recognized that to get damage from one player to the  
+other I would need to get a player's offensive actions, increase/decrease the individual attack  
+amounts by the player's attack stat and opponent's defense stat, combine all of the modified values  
+into one final damage value, decrease that damage value by the final defensive value of the opponent,  
+generated from all of their defensive actions, and finally reduce the opponent's HP by the remaining  
+value, which has a minimum of one if an attack has been made.  
+
+This was correct, but in my continued design I wasn't entirely sure how to manage the data between  
+the two players, ultimately having one method which gets the player actions triggered once for each  
+player, with it taking the player objects as input, and a second method which triggers only once and  
+takes the final offense/defense values in int[] format from the previous methods as input. This one  
+takes the combined attack value minus the opponent's final defense value, and makes the players take  
+damage.  
 
 ## Class Overview
 
 ### Action Interface
+The Action interface is here to define the rules for actions. Every action must have a type, must  
+have an attack method and a defend method (usually one of these is empty), and must generate a random
+integer.  
+
+Though this is not explicitly defined in the action interface, the two types of actions used in this  
+program are "attack" and "defense" actions, which are used to either increase damage dealt or reduce  
+damage taken.  
 
 ### Player
+The primary purpose of the player class is to store all of the actions and stats used in combat.  
+These stats are:
+ - attack, which adds itself to any damage dealt.
+ - defense, which decreases itself from any damage taken.
+ - HP, which is what takes damage.
+ - numActions, which is the number of actions a player can take in a turn.
+ - actions, which is an array that stores the actions a player can take.
+
+The player class can also contain methods that help access and modify these stats, and they are all  
+designed and managed throughout the program so in such a way that they can be modified.  
 
 ### Game
+The game class is the primary class of this program, and it organizes all the data and really makes  
+the game run. Its purpose is to organize the whole program, and make it run on a macro level. This  
+is the class that contains the two players, and has the main responsibility of organizing all of  
+their data, making sure that both players submit actions, get the results of those actions, get a  
+final attack/defense value, and take damage.  
 
 ## Use Cases
 The primary use case of this program is as a recreational activity between two users.  
@@ -83,29 +123,29 @@ public void start(){
 ---- } // end if else  
 }  
 
-// This needs the opposing player to access their stats, specifically defense
+// This needs the opposing player to access their stats, specifically defense  
 public int[] startActions(player, opponent){  
 ---- // getCombatInput returns the location of actions as a string  
 ---- print(player + ": Enter your Actions")  
 ---- int damage = 0  
 ---- int defend = 0  
 ---- int[player.getNumActions()] tempActions = {}  
----- Action[player.getNumActions()] actions = player.getActions()
+---- Action[player.getNumActions()] actions = player.getActions()  
 ---- // First for loop gets all actions
 ---- for(int i = 0; i < player.getNumActions(); i++){  
 -------- tempActions[i] = player.getCombatInput()  
 ---- } // End for  
----- // Second for loop uses all actions
----- for(int j = 0; j < player.getNumActions(); j++){
+---- // Second for loop uses all actions  
+---- for(int j = 0; j < player.getNumActions(); j++){  
 -------- if(actions[tempActions[j]].getType() == "attack"){  
 ------------ damage += actions[tempActions[j]].attack(player.getAttack(), opponent.getDefense())  
 -------- } else {  
 ------------ defend += actions[tempActions[j]].defend()  
 -------- } // End if/else  
 ---- } // End for  
----- // Returns data
----- int[] atkDef = {damage, defend}
----- return atkDef[]
+---- // Returns data  
+---- int[] atkDef = {damage, defend}  
+---- return atkDef[]  
 }  
 
 public void takeDamage(int[] p1atkDef, int[] p2atkDef){  
@@ -150,16 +190,16 @@ public int getCombatInput(){
 -------- } // end if  
 ---- } // end for  
 ---- string userInput = get input from user  
----- return int(userInput)
----- // might validate input if I have time
+---- return int(userInput)  
+---- // might validate input if I have time  
 }  
 
 public int getAttack(){  
 ---- return attack  
 }  
 
-public void setAttack(int atk){
----- attack = atk
+public void setAttack(int atk){  
+---- attack = atk  
 }  
 
 public int getDefense(){  
@@ -178,8 +218,8 @@ public void setHP(health){
 ---- HP = health  
 }  
 
-public int getNumActions(){
----- return numActions
+public int getNumActions(){  
+---- return numActions  
 }  
 
 public int setNumActions(actNum){  
@@ -200,7 +240,7 @@ string type
 public int getRandomNum(int min, int max)  
 public int attack(int atk, int def)  
 public int defend()  
-public string getType()
+public string getType()  
 public void setType(string newType)
 
 ### Attack Class
@@ -229,12 +269,12 @@ public string getType(){
 }  
 
 public void setType(newType){  
----- if(newType != "attack" and newType != "defense"){
--------- print("Invalid type!")
+---- if(newType != "attack" and newType != "defense"){  
+-------- print("Invalid type!")  
 ---- } else {  
 -------- type = newType  
 ---- } // End if/else  
-}
+}  
 
 ### Defend Class
 
@@ -258,9 +298,9 @@ public string getType(){
 }  
 
 public void setType(newType){  
----- if(newType != "attack" and newType != "defense"){
--------- print("Invalid type!")
+---- if(newType != "attack" and newType != "defense"){  
+-------- print("Invalid type!")  
 ---- } else {  
 -------- type = newType  
 ---- } // End if/else  
-}
+}  
