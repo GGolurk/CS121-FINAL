@@ -51,17 +51,18 @@ public int[] startActions(player, opponent){
 ---- print(player + ": Enter your Actions")  
 ---- int damage = 0  
 ---- int defend = 0  
----- Action[player.getNumActions()] actions = {}  
+---- int[player.getNumActions()] tempActions = {}  
+---- Action[player.getNumActions()] actions = player.getActions()
 ---- // First for loop gets all actions
 ---- for(int i = 0; i < player.getNumActions(); i++){  
--------- actions[i] = player.getCombatInput()  
+-------- tempActions[i] = player.getCombatInput()  
 ---- } // End for  
 ---- // Second for loop uses all actions
 ---- for(int j = 0; j < player.getNumActions(); j++){
--------- if(actions[j].getType() == "attack"){  
------------- damage += actions[j].attack(player.getAttack(), opponent.getDefense())  
+-------- if(actions[tempActions[j]].getType() == "attack"){  
+------------ damage += actions[tempActions[j]].attack(player.getAttack(), opponent.getDefense())  
 -------- } else {  
------------- defend += actions[j].defend()  
+------------ defend += actions[tempActions[j]].defend()  
 -------- } // End if/else  
 ---- } // End for  
 ---- // Returns data
