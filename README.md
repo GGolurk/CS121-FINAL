@@ -1,5 +1,43 @@
 # CS121-FINAL
 Final project for CS121.
+Made by Nathan Merk.
+
+## Purpose
+This short game is designed to show off how much I have learned at this class, how much better  
+I've gotten at making algorithms and programs, especially in an Object oriented setting, and  
+how I have broadened my understanding of what it means to develop software. Also, the ultimate
+purpose of this as a final project is to continue to learn, as I have all semester.
+
+## Overview
+
+## Data Management
+
+## Class Overview
+
+### Action Interface
+
+### Player
+
+### Game
+
+## Use Cases
+The primary use case of this program is as a recreational activity between two users.  
+
+## Use of OOP Ideas
+This program has been designed with demonstrating the ideas behind OOP programing in mind.  
+It features 5 classes and an interface, and demonstrates the main features of OOP programming:
+ - Inheritance: Three classes inherit from the Action interface.
+ - Encapsulation: Data members are protected but accessible through methods.
+ - Polymorphism: The Action interface is has abstract methods designed to change with each implementation.
+ - Abstraction: The Action interface is an interface, which is abstract.
+ - Aggregation: The Game class holds two instances of the Player class.
+ - Composition: The Player class holds an array of Action instances.
+
+## Technology/Implementation
+This can easily be written in any OOP language, though I will be using Java for this project as interfaces  
+will be useful. There will not be any UI besides the CLI, and there will be no external dependencies.
+
+## Reflection
 
 
 ## Algorithm Planning
