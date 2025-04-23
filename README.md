@@ -65,7 +65,7 @@ The primary use case of this program is as a recreational activity between two u
 
 ## Use of OOP Ideas
 This program has been designed with demonstrating the ideas behind OOP programing in mind.  
-It features 5 classes and an interface, and demonstrates the main features of OOP programming:
+It features 4 classes and an interface, and demonstrates the main features of OOP programming:
  - Inheritance: Three classes inherit from the Action interface.
  - Encapsulation: Data members are protected but accessible through methods.
  - Polymorphism: The Action interface is has abstract methods designed to change with each implementation.
@@ -78,7 +78,21 @@ This can easily be written in any OOP language, though I will be using Java for 
 will be useful. There will not be any UI besides the CLI, and there will be no external dependencies.
 
 ## Reflection
+I learned a lot from this project, especially in class the day before it was due. To be perfectly honest,  
+most of what I wrote here was on the day before this project was due. That isn't to say I didn't do any of  
+this before, I thought about this a lot, I just didn't document it. That's probably my biggest takeaway from  
+this project, DOCUMENTATION IS IMPORTANT. DOCUMENT YOUR STUFF. Part of that is thinking about what you want  
+done before you even begin designing the UML, something I kinda did but it wasn't ideal. There's a lot about  
+this project that wasn't ideal, and if I had more time I would kill all the files and do some serious reworking  
+on the algorithm, starting by catching up on the thinking I should have done more of before creating it.  
+But that's kinda the point of this. I'm going to mess up, goof around a little, and submit code that is  
+functional but not really ideal, which is the second thing I learned about this project, implementation is so,  
+so much easier than design. I know we've been talking about how that's the case the whole semester but oh my  
+it was so much easier. Maybe it's cause my algorithm is way too specific, but even so it was refreshingly simple.  
 
+At the end of this, I can see this is certainly the work of someone who hasn't made their own documentation before,  
+but this is the best I've done so far, and I'm proud of it. Compared to the spaghetti pool that happened when I  
+tried to make a (fully procedural, I didn't know how to use OOP) game in high school, this is a massive success.
 
 ## Algorithm Planning
 
