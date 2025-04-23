@@ -27,28 +27,51 @@ public class Game{
 		Scanner input = new Scanner(System.in);
 		String userInput = input.nextLine();
 		if(userInput.equals("1")){
-			String winner = "nobody";
-			int counter = 1;
-			// Playing the game
-			while(winner.equals("nobody")){
-				System.out.println();
-				System.out.println("TURN " + counter);
-				counter++;
-				System.out.println("Player 1 HP: " + player1.getHP() + " Player 2 HP: " + player2.getHP());
-				// Getting the ATK/DEF from both players as an array [ATK, DEF]
-				// I tweaked these next few lines a lot when designing the algorithm...
-				System.out.println("Player 1: Enter Your Actions");
-				int[] p1actions = startActions(player1, player2);
-				System.out.println("Player 2: Enter Your Actions");
-				int[] p2actions = startActions(player1, player2);
-				takeDamage(p1actions, p2actions);
-				winner = determineWinner();
+			Boolean keepGoing = true;
+			while(keepGoing == true){
+				String winner = "nobody";
+				int counter = 1;
+				// Playing the game
+				while(winner.equals("nobody")){
+					System.out.println();
+					System.out.println("TURN " + counter);
+					counter++;
+					System.out.println("Player 1 HP: " + player1.getHP() + " Player 2 HP: " + player2.getHP());
+					// Getting the ATK/DEF from both players as an array [ATK, DEF]
+					// I tweaked these next few lines a lot when designing the algorithm...
+					System.out.println("Player 1: Enter Your Actions");
+					int[] p1actions = startActions(player1, player2);
+					System.out.println("Player 2: Enter Your Actions");
+					int[] p2actions = startActions(player1, player2);
+					takeDamage(p1actions, p2actions);
+					winner = determineWinner();
+				} // End while
+				System.out.println("The winner is: " + winner);
+				System.out.println("Enter 0 to exit, or 1 to play again.");
+				keepGoing = postFight();
 			} // End while
-			System.out.println("The winner is: " + winner);
 		} else {
 			System.out.println("ok");
 		} // End if/else
 	} // End start
+
+	public Boolean postFight(){
+		Scanner input = new Scanner(System.in);
+		String userInput = input.nextLine();
+		if(userInput.equals("0")){
+			return false;
+		} else {
+			System.out.println("Player 1 upgrades:");
+			player1.upgrade();
+			player1.upgrade();
+			System.out.println("Player 2 upgrades:");
+			player2.upgrade();
+			player2.upgrade();
+			player1.setHP(player1.getMaxHP());
+			player2.setHP(player2.getMaxHP());
+			return true;
+		} // End if/else
+	} // End postFight
 
 	public int[] startActions(Player player, Player opponent){
 		int damage = 0;

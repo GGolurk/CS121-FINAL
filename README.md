@@ -120,18 +120,21 @@ public void start(){
 ---- print("Enter 0 to exit, or 1 to play")  
 ---- userInput = get the input of the user  
 ---- if(userInput == 1){  
--------- String winner = "nobody"  
--------- int counter = 1  
--------- while(winner == "nobody"){  
------------- print("TURN " + counter)  
------------- counter++  
------------- // Getting the ATK/DEF from both players as an int array [ATK, DEF]  
------------- int[] p1actions = startActions(player1, player2)  
------------- int[] p2actions = startActions(player2, player1)  
------------- // Takes the atk/def of both players and applies damage  
------------- takeDamage(p1actions, p2actions)  
------------- winner = determineWinner()  
--------- } // end while  
+-------- while(keepGoing == true!){  
+------------ String winner = "nobody"  
+------------ int counter = 1  
+------------ while(winner == "nobody"){  
+---------------- print("TURN " + counter)  
+---------------- counter++  
+---------------- // Getting the ATK/DEF from both players as an int array [ATK, DEF]  
+---------------- int[] p1actions = startActions(player1, player2)  
+---------------- int[] p2actions = startActions(player2, player1)  
+---------------- // Takes the atk/def of both players and applies damage  
+---------------- takeDamage(p1actions, p2actions)  
+---------------- winner = determineWinner()  
+------------ } // end while  
+------------ keepGoing = postFight()
+-------- } // End while  
 -------- print("The winner is: " + winner)  
 ---- } else {  
 -------- do nothing  
@@ -188,13 +191,25 @@ public string determineWinner(){
 ---- } // end if/else  
 }  
 
+public bool postFight(){  
+---- ask user if they want to keep playing  
+---- if no, return FALSE  
+---- if yes{  
+-------- player1.upgrade()  
+-------- player1.upgrade()  
+-------- player2.upgrade()   
+-------- player2.upgrade()  
+-------- return TRUE   
+---- }  
+}
 
 ### Player Class
 
 Data:
  - int attack
  - int defense
- - int HP
+ // HP is an array to store max HP and current HP  
+ - int[] HP
  - Action[] actions
  - int numActions
 
@@ -207,6 +222,26 @@ public int getCombatInput(){
 ---- string userInput = get input from user  
 ---- return int(userInput)  
 ---- // might validate input if I have time  
+}  
+
+public void upggrade(){  
+---- print("Enter 0 to upgrade attack")  
+---- print("Enter 1 to upgrade defense")  
+---- print("Enter 2 to upgrade HP")  
+---- print("Enter 3 to upgrade number of actions")  
+---- input = get player input  
+---- if input == 0{  
+-------- setAttack(getAttack()++)  
+---- }  
+---- if input == 1{  
+-------- setDefense(getDefense()++)  
+---- }  
+---- if input == 2{  
+-------- setHP(getHP() + 2)  
+---- }  
+---- if input == 3{  
+-------- setNumActions(getNumActions()++)  
+---- }  
 }  
 
 public int getAttack(){  
@@ -269,6 +304,40 @@ public int getRandomNum(x, y){
 public int attack(int atk, int def){  
 ---- int damage = getRandomNum(1, 6)  
 ---- damage += (atk - def)  
+---- if(damage < 1){  
+-------- damage = 1  
+---- } // End if  
+---- return damage  
+}  
+
+public int defend(){  
+---- return 0  
+}  
+
+public string getType(){  
+---- return type  
+}  
+
+public void setType(newType){  
+---- if(newType != "attack" and newType != "defense"){  
+-------- print("Invalid type!")  
+---- } else {  
+-------- type = newType  
+---- } // End if/else  
+}  
+
+### Pierce Class
+// An attack that deals low damage but ignores defense
+
+type = "attack"
+
+public int getRandomNum(x, y){  
+---- // Get random number  
+}  
+
+public int attack(int atk, int def){  
+---- int damage = getRandomNum(-3, 3)  
+---- damage += atk  
 ---- if(damage < 1){  
 -------- damage = 1  
 ---- } // End if  

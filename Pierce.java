@@ -1,13 +1,12 @@
-// VERSION 1
-// Attack Class
-// Follows action interface. Provides a random attack value
+// VERSION 2
+// An attack that deals very low damage but ignores defense
 
-public class Attack implements Action{
+public class Pierce implements Action{
 	// Data
-	protected String type = "";
+	String type = "";
 
 	// Methods
-	public Attack(){
+	public Pierce(){
 		type = "attack";
 	} // End constructor
 
@@ -21,8 +20,8 @@ public class Attack implements Action{
 	} // End getRandomNum
 
 	public int attack(int atk, int def){
-		int damage = getRandomNum(1, 6);
-		damage += (atk - def);
+		int damage = getRandomNum(-3, 3);
+		damage += atk;
 		if(damage < 1){
 			damage = 1;
 		} // End if
@@ -44,4 +43,4 @@ public class Attack implements Action{
 			type = newType;
 		} // End if/else
 	} // End setType
-} // End attack
+} // End pierce
