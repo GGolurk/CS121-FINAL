@@ -52,6 +52,7 @@ These stats are:
 
 The player class can also contain methods that help access and modify these stats, and they are all  
 designed and managed throughout the program so in such a way that they can be modified.  
+Specifically, these are the upgrade and getCombatInput methods.
 
 ### Game
 The game class is the primary class of this program, and it organizes all the data and really makes  
@@ -65,7 +66,7 @@ The primary use case of this program is as a recreational activity between two u
 
 ## Use of OOP Ideas
 This program has been designed with demonstrating the ideas behind OOP programing in mind.  
-It features 4 classes and an interface, and demonstrates the main features of OOP programming:
+It features 5 classes and an interface, and demonstrates the main features of OOP programming:
  - Inheritance: Three classes inherit from the Action interface.
  - Encapsulation: Data members are protected but accessible through methods.
  - Polymorphism: The Action interface is has abstract methods designed to change with each implementation.
